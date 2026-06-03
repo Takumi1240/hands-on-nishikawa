@@ -1,0 +1,30 @@
+{
+  "name": "GitHub Copilot Workshop",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "hostRequirements": {
+    "cpus": 8,
+    "memory": "32gb",
+    "storage": "64gb"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "GitHub.vscode-github-actions"
+      ],
+      "settings": {
+        "github.copilot.chat.mcp.discovery.enabled": true
+      }
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "forwardPorts": [4321, 4322],
+  "portsAttributes": {
+    "4321": { "label": "Astro dev",     "onAutoForward": "openPreview" },
+    "4322": { "label": "Astro preview", "onAutoForward": "silent" }
+  },
+  "postCreateCommand": "gh extension install github/gh-copilot || true && npm install -g @github/copilot pnpm || true && curl -sL https://raw.githubusercontent.com/github/gh-aw/main/install-gh-aw.sh | bash || true && npx playwright install chrome || true"
+}
